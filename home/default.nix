@@ -6,8 +6,18 @@ in {
 
   home-manager = {
     extraSpecialArgs = { inherit username; };
-    users.${username} = { home.stateVersion = "22.11"; };
     useGlobalPkgs = true;
     useUserPackages = true;
+
+    users = {
+      "${username}" = { pkgs, ... }: {
+        home = {
+          packages = import ./packages { inherit pkgs; };
+          shellAliases = (import ./aliases.nix { inherit pkgs; }).shell;
+          stateVersion = "22.11";
+        };
+        programs = import ./programs { inherit pkgs; };
+      };
+    };
   };
 }

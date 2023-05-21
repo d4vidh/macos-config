@@ -14,7 +14,6 @@
       "notion"
       "raycast"
       "readdle-spark"
-      "visual-studio-code"
       "warp"
     ];
 
