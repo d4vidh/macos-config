@@ -30,7 +30,7 @@
       while [ $# -gt 0 ]; do
         case $1 in
           --host)
-            HOST=$2
+            HOSTNAME=$2
             shift;;
           *)
             echo "build --host STRING"
@@ -39,7 +39,7 @@
         shift
       done
 
-      nix build ".#darwinConfigurations.$HOST.system"
+      nix build ".#darwinConfigurations.$HOSTNAME.system"
     '';
 
     load.exec = ''
@@ -51,7 +51,7 @@
       while [ $# -gt 0 ]; do
         case $1 in
           --host)
-            HOST = $2
+            HOSTNAME = $2
             shift;;
           *)
             echo "load --host STRING"
@@ -60,7 +60,7 @@
         shift
       done
 
-      ./result/sw/bin/darwin-rebuild switch --flake ".#$1"
+      ./result/sw/bin/darwin-rebuild switch --flake ".#$HOSTNAME"
     '';
   };
 }
